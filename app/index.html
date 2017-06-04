@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HR Solution App</title>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link href="./app.css" rel='stylesheet' type='text/css'>
+  <script src="./app.js"></script>
+</head>
+<body>
+  <h1>HR Solution</h1>
+  <h2>Blockchain Truffle Dapp</h2>
+  
+  <br>
+  <h1>Add</h1>
+  <br><label for="name">Name:</label><input type="text" id="name" placeholder="James Franco"></input>
+  <br><label for="email">Email:</label><input type="text" id="email" placeholder="james.franco@stanford.edu"></input>
+  <br><label for="phone">Phone:</label><input type="text" id="phone" placeholder="034-2354754"></input>
+  <br><label for="company">Company:</label><input type="text" id="company" placeholder=""></input>
+  <br><br><button id="submit" onclick="addRecord()">Add Record</button>
+  <br><br>
+  <h1>Search</h1>
+  <br><label for="search-email">Email:</label><input type="text" id="search-email" placeholder="james.franco@stanford.edu"></input>
+  <br><br><button id="submit" onclick="searchRecord()">Search Record</button>
+  <br><br>
+  <span id="status"></span><br>
+  <b id="bold-name"></b><span id="show-name"></span><br>
+  <b id="bold-email"></b><span id="show-email"></span><br>
+  <b id="bold-phone"></b><span id="show-phone"></span><br>
+  <b id="bold-company"></b><span id="show-company"></span><br>
+</body>
+</html>
