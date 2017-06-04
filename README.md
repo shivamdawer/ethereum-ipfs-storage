@@ -1,6 +1,6 @@
 # blockchain-save-data
 Form to save/fetch data using ethereum blockchain. Blockchain simulated using ethereumjs testrpc.<br />
-Form contains for fields - name,email,phone,company - of which email is primary key.
+Form contains four fields - name,email,phone,company - of which email is primary key.
 
 1. [testrpc v3.0.5](https://github.com/shivamdawer/testrpc)
 2. Clone repo
