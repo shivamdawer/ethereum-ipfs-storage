@@ -10,7 +10,7 @@ Form to save/fetch file on IPFS storage, and hash on ethereum blockchain. Blockc
 7. In terminal 3, `cd blockchain-save-data && truffle migrate && truffle build` (Open clone, compile contracts and scripts)
 
 ## TESTRPC
-A Node.js based Ethereum client for testing and development, testrpc is written in javascript. By default, it simulates 10 ethereum accounts on localhost at port 8545. 
+A Node.js based Ethereum client for testing and development, testrpc is written in javascript. By default, it simulates 10 ethereum accounts on localhost on port 8545. 
 <br><br>
 It is also possible to use a local ethereum node using geth. Set up with one or more accounts unlocked (e.g, `--unlock 0`), RPC enabled (`--rpc`) and the proper RPC CORS set up (e.g, `--rpccorsdomain = "*"`)
 <br>
@@ -27,9 +27,11 @@ $ geth --unlock=<address> --rpc --rpccorsdomain = "*" --rpcport="8545" console
 ```
 
 ## Localhost
-Generally, truffle creates a server using `truffle serve` (default port: 8080). However, this does not supprt PHP. Hence, project should be cloned in root of localhost (LAMP or XAMPP). This can be accessed using following url : `http://localhost/blockchain-save-data/build/`
+Generally, truffle creates a server using `truffle serve` (default port: 8080). Since IPFS daemon runs on port 8080, this could be configured to run on a different port, e.g. `truffle serve -p 8081`. 
+<br>
+However, this port does not supprt PHP. Hence, project should be cloned in root of localhost (LAMP or XAMPP). This can be accessed using following url : `http://localhost/blockchain-save-data/build/`
 
-### Local IPFS node
+## Local IPFS node
 
 First, [install IPFS](https://ipfs.io/docs/install/) on your machine.
 <br /><br />
