@@ -5,6 +5,10 @@
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
   <link href="./app.css" rel='stylesheet' type='text/css'>
   <script src="./app.js"></script>
+  <script src="./web3.min.js"></script>
+  <script src="./ipfs.js"></script>
+  <script src="./jquery-3.2.1.min.js"></script>
+
 </head>
 <body>
   <h1>HR Solution</h1>
@@ -21,6 +25,9 @@
   <h1>Search</h1>
   <br><label for="search-email">Email:</label><input type="text" id="search-email" placeholder="james.franco@stanford.edu"></input>
   <br><br><button id="submit" onclick="searchRecord()">Search Record</button>
+  <br><br>
+  <h1>Upload file</h1>
+  <br><label for="file">File:</label><input type="file" id="file" onchange="loadFile(event)"></input>
   <br><br>
   <span id="status"></span><br>
   <b id="bold-name"></b><span id="show-name"></span><br>
