@@ -26,11 +26,6 @@ $ geth init /full/path/to/CustomGenesis.json
 $ geth --unlock=<address> --rpc --rpccorsdomain = "*" --rpcport="8545" console
 ```
 
-## Localhost
-Generally, truffle creates a server using `truffle serve` (default port: 8080). Since IPFS daemon runs on port 8080, this could be configured to run on a different port, e.g. `truffle serve -p 8081`. 
-<br>
-However, this port does not supprt PHP. Hence, project should be cloned in root of localhost (LAMP or XAMPP). This can be accessed using following url : `http://localhost/blockchain-save-data/build/`
-
 ## Local IPFS node
 
 First, [install IPFS](https://ipfs.io/docs/install/) on your machine.
@@ -55,3 +50,8 @@ $ ipfs config --json Gateway.HTTPHeaders.Access-Control-Allow-Origin '["*"]'
 You can now start the IPFS daemon:
 
 `$ ipfs daemon`
+
+## Localhost
+Generally, truffle creates a server using `truffle serve` (default port: 8080). Since IPFS daemon runs on port 8080, this could be configured to run on a different port, e.g. `truffle serve -p 8081`. This can be accessed using following url : `http://localhost:8081`
+<br>
+However, this port does not supprt PHP. Hence, project should be cloned in root of localhost (LAMP or XAMPP). This can be accessed using following url : `http://localhost/blockchain-save-data/build/`
