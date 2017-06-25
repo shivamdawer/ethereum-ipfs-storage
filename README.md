@@ -1,4 +1,4 @@
-# blockchain-save-data
+# ethereum-ipfs-storage
 Form to save/fetch file on IPFS storage, and hash on ethereum blockchain. Blockchain simulated using ethereumjs testrpc.<br />
 
 1. Install [testrpc v3.0.5](https://github.com/shivamdawer/testrpc)
@@ -6,8 +6,7 @@ Form to save/fetch file on IPFS storage, and hash on ethereum blockchain. Blockc
 3. `npm install -g truffle@2.1.2` (Install truffle v2)
 4. In terminal 1, `testrpc -l 10000000000` (High gas limit),<br> or `geth --unlock=<address> --rpc --rpccorsdomain = "*" --rpcport="8545" console` (Explained below)
 5. In terminal 2, start IPFS daemon
-6. In terminal 3, `npm init`
-7. In terminal 3, `cd blockchain-save-data && truffle migrate && truffle build` (Open clone, compile contracts and scripts)
+6. In terminal 3, `cd ethereum-ipfs-storage && truffle migrate && truffle build` (Open clone, compile contracts and scripts)
 
 ## TESTRPC
 A Node.js based Ethereum client for testing and development, testrpc is written in javascript. By default, it simulates 10 ethereum accounts on localhost on port 8545. 
@@ -54,4 +53,4 @@ You can now start the IPFS daemon:
 ## Localhost
 Generally, truffle creates a server using `truffle serve` (default port: 8080). Since IPFS daemon runs on port 8080, this could be configured to run on a different port, e.g. `truffle serve -p 8081`. This can be accessed using following url : `http://localhost:8081`
 <br>
-However, this port does not supprt PHP. Hence, project should be cloned in root of localhost (LAMP or XAMPP). This can be accessed using following url : `http://localhost/blockchain-save-data/build/`
+However, this port does not supprt PHP. Hence, project should be cloned in root of localhost (LAMP or XAMPP). This can be accessed using following url : `http://localhost/ethereum-ipfs-storage/build/`
