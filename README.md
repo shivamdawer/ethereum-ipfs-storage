@@ -1,4 +1,4 @@
-# blockchain-save-data
+# blockchain-save-data (See ipfs branch for data storage)
 Form to save/fetch data using ethereum blockchain. Blockchain simulated using ethereumjs testrpc.<br />
 Form contains four fields - name,email,phone,company - of which email is primary key.
 
