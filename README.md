@@ -6,5 +6,5 @@ Form contains four fields - name,email,phone,company - of which email is primary
 2. Clone repo
 3. `npm install -g truffle@2.1.2` (Install truffle v2)
 4. In terminal 1, `testrpc -l 10000000000` (High gas limit)
-5. In terminal 2, `cd blockchain-save-data && truffle migrate && truffle serve` (Open clone, compile contracts, launch local server at localhost:8080)
+5. In terminal 2, `cd ethereum-ipfs-storage && truffle migrate && truffle serve` (Open clone, compile contracts, launch local server at localhost:8080)
 
