@@ -1,7 +1,7 @@
 <?php
 
-	$data = $_GET['data'];
-	$dir = "/tmp/".$_GET['filename'];
+	$data = $_POST['data'];
+	$dir = "/tmp/".$_POST['filename'];
 	file_put_contents($dir, $data);
 	echo "File created successfully at ".$dir."\n";
 	return $output;

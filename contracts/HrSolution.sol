@@ -1,46 +1,42 @@
 pragma solidity ^0.4.2;
 
-import "OwnerFile.sol";
+contract HrSolution {
+    address public accountant;
+    mapping (bytes => bytes) emailHashMap;
 
-// This is just a simple example of a coin-like contract.
-// It is not standards compatible and cannot be expected to talk to other
-// coin/token contracts. If you want to create a standards-compliant
-// token, see: https://github.com/ConsenSys/Tokens. Cheers!
+    function HrSolution() {
+        accountant = msg.sender;
+    }
 
-contract HrSolution is OwnerFile {
-	struct Entry {
-	    bytes4 name;
-	    bytes4 email;
-	    bytes4 phone;
-	    bytes4 company;
-	}
+	function addRecord(bytes hash, bytes email) public payable {
+        if (msg.sender != accountant) { return; }
+        emailHashMap[email] = hash;
+    }
 
-	mapping (uint => Entry) entries;
-	mapping (address => uint) balances;
+    function checkRecord(bytes email) returns (bool) {
+        bytes hash = emailHashMap[email];
+        if(sha3(hash) == sha3('')) {
+            return false;
+        }
+        return true;
+    }
 
-	function addRecord(bytes4 name, bytes4 email, bytes4 phone, bytes4 company) payable {
-    if (msg.sender != accountant) { return; }
+    function fetchRecord(bytes email) returns (bytes) {
+        if (msg.sender != accountant) { return; }
+        return emailHashMap[email];
+    }
 
-    uint id = OwnerFile.createId(email);
+    function deleteRecord(bytes email) public {
+        if (msg.sender != accountant) { return; }
+        // bytes hash = emailHashMap[email];
+        // if(hash != 0x0) {
+        delete emailHashMap[email];
+        // }
+    }
 
-    Entry memory record;
-    record.name = name;
-    record.email = email;
-    record.phone = phone;
-    record.company = company;
-
-    entries[id] = record;
-  }
-
-  function fetchRecord(uint id) constant returns (bytes4 n, bytes4 e, bytes4 p, bytes4 c) {
-    if (msg.sender != accountant) { return; }
-
-    if(id == 0) return;
-    Entry record = entries[id];
-    return (record.name, record.email, record.phone, record.company);
-    // n = bytes4(record.name);
-    // e = bytes4(record.email);
-    // p = bytes4(record.phone);
-    // c = bytes4(record.company);
-  }
+    function destroy() { // so funds not locked in contract forever
+        if (msg.sender == accountant) { 
+            suicide(accountant); // send funds to accountant
+        }
+    }
 }
