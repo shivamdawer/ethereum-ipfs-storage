@@ -1,4 +1,4 @@
-# ethereum-ipfs-storage (See ipfs branch for data storage)
+# ethereum-ipfs-storage (Storage of data on ethereum)
 Form to save/fetch data using ethereum blockchain. Blockchain simulated using ethereumjs testrpc.<br />
 Form contains four fields - name,email,phone,company - of which email is primary key.
 
