@@ -68,63 +68,10 @@ function addRecord() {
               'company': company
             };
   updateElement("status", "Initiating transaction... (please wait)");
-  addDataToIPFS(data, generateRandomString(), true);
+  addDataToIPFS(data, generateRandomString(), true, email);
 }
 
-function searchRecord() {
-  var email = document.getElementById("search-email").value;
-  
-  if(email == "") {
-    updateElement("status", "Email field cannot be empty!");
-    return;
-  }
-
-  updateElement("status", "Initiating search... (please wait)");
-  var hr = HrSolution.deployed();
-  updateElement("bold-name", "");
-  updateElement("show-name", "");
-  updateElement("bold-email", "");
-  updateElement("show-email", "");
-  updateElement("bold-phone", "");
-  updateElement("show-phone", "");
-  updateElement("bold-company", "");
-  updateElement("show-company", "");
-  hr.checkRecord.call(email).then(function(flag) {
-    flag = flag.valueOf()
-    console.log(flag)
-    if(flag == true) {
-      hr.fetchRecord.call(email, {from: account}).then(function(record) {
-        console.log(email, record.valueOf(), web3.toUtf8(record.valueOf()))
-        
-        var fileHash = web3.toUtf8(record.valueOf())
-        var fileURL = ipfsDataHost + "/" + fileHash
-        $.get(fileURL, function(output) {
-          output = JSON.parse(output);
-          updateElement("status", "");
-          updateElement("bold-name", "Name: ");
-          updateElement("show-name", output.name);
-          updateElement("bold-email", "Email: ");
-          updateElement("show-email", output.email);
-          updateElement("bold-phone", "Phone: ");
-          updateElement("show-phone", output.phone);
-          updateElement("bold-company", "Company: ");
-          updateElement("show-company", output.company);
-          console.log(output)
-        })
-      }).catch(function(e) {
-        console.log(e);
-        updateElement("status", "Error retrieving record. You are low on ether.");
-      });
-    } else {
-      updateElement("status", "Record not found.");
-    }
-  }).catch(function(e) {
-    console.log(e);
-    updateElement("status", "Error checking for record. You are low on ether.");
-  });
-}
-
-function addDataToIPFS(data, filename, addToBlockchain = false) {
+function addDataToIPFS(data, filename, addToBlockchain = false, primaryKey = '') {
   var url = "./php/senddata.php";
   data = JSON.stringify(data)
 
@@ -146,12 +93,14 @@ function addDataToIPFS(data, filename, addToBlockchain = false) {
           if(addToBlockchain == true) {
             var fileHash = result[0].Hash;
             var hr = HrSolution.deployed();
-            hr.addRecord(fileHash, email, {from: account}).then(function() {
+            hr.addRecord(fileHash, primaryKey, {from: account}).then(function() {
               updateElement("status", "Transaction complete!");
             }).catch(function(e) {
               console.log(e);
               updateElement("status", "Error adding record. You are low on ether.");
             });
+            updateElement("bold-url", "");
+            updateElement("show-url", "");
             updateElement("bold-name", "");
             updateElement("show-name", "");
             updateElement("bold-email", "");
@@ -161,12 +110,68 @@ function addDataToIPFS(data, filename, addToBlockchain = false) {
             updateElement("bold-company", "");
             updateElement("show-company", "");
           }
+          updateElement("bold-url", "URL: ");
+          updateElement("show-url", "<a href='"+fileURL+"'>IPFS Gateway</a>");
       } else {
           console.error('No file for you...');
           updateElement("status", "IPFS Failed!");
           return null;
       }
     });
+  });
+}
+
+function searchRecord() {
+  var email = document.getElementById("search-email").value;
+  
+  if(email == "") {
+    updateElement("status", "Email field cannot be empty!");
+    return;
+  }
+
+  updateElement("status", "Initiating search... (please wait)");
+  var hr = HrSolution.deployed();
+  updateElement("bold-url", "");
+  updateElement("show-url", "")
+  updateElement("bold-name", "");
+  updateElement("show-name", "");
+  updateElement("bold-email", "");
+  updateElement("show-email", "");
+  updateElement("bold-phone", "");
+  updateElement("show-phone", "");
+  updateElement("bold-company", "");
+  updateElement("show-company", "");
+  hr.checkRecord.call(email).then(function(flag) {
+    flag = flag.valueOf()
+    if(flag == true) {
+      hr.fetchRecord.call(email, {from: account}).then(function(record) {
+        
+        var fileHash = web3.toUtf8(record.valueOf())
+        var fileURL = ipfsDataHost + "/" + fileHash
+        $.get(fileURL, function(output) {
+          output = JSON.parse(output);
+          updateElement("status", "");
+          updateElement("bold-url", "URL: ");
+          updateElement("show-url", "<a href='"+fileURL+"'>IPFS Gateway</a>")
+          updateElement("bold-name", "Name: ");
+          updateElement("show-name", output.name);
+          updateElement("bold-email", "Email: ");
+          updateElement("show-email", output.email);
+          updateElement("bold-phone", "Phone: ");
+          updateElement("show-phone", output.phone);
+          updateElement("bold-company", "Company: ");
+          updateElement("show-company", output.company);
+        })
+      }).catch(function(e) {
+        console.log(e);
+        updateElement("status", "Error retrieving record. You are low on ether.");
+      });
+    } else {
+      updateElement("status", "Record not found.");
+    }
+  }).catch(function(e) {
+    console.log(e);
+    updateElement("status", "Error checking for record. You are low on ether.");
   });
 }
 
