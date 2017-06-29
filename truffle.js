@@ -16,7 +16,6 @@ module.exports = {
     "app.css": [
       "stylesheets/app.css"
     ],
-    "images/": "images/",
     "php/": "php/"
   },
   rpc: {
